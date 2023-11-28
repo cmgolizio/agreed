@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -14,14 +14,22 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+} */
+
+/* body {
+  color: #f8f8ff;
+  background: linear-gradient(180deg, hsla(240, 14%, 10%, 1) 50%, hsla(240, 32%, 15%, 1) 100%);
+} */
+
+@layer base {
+  body {
+    @apply dark:bg-gradient-to-b dark:from-nearBlack dark:from-20% dark:to-[#1B1B34] dark:text-ghostW bg-gradient-to-b from-ghostW from-20% to-[#E1E1FF] text-nearBlack
+  }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer components {
+  #input {
+    @apply w-full mx-3 p-3 rounded-md bg-nearBlack dark:bg-lightG text-ghostW dark:text-nearBlack self-center focus:outline-none
+  }
 }
+/* linear-gradient(180deg, hsla(240, 14%, 10%, 1) 50%, hsla(240, 32%, 15%, 1) 100%) */
