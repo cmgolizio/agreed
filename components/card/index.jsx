@@ -5,7 +5,7 @@ import { motion, useDragControls, useAnimate } from "framer-motion";
 import IconButton from "../ui/icon-button";
 import { AuthContext } from "@/contexts/AuthContext";
 
-const Card = ({ category, data, idx }) => {
+const Card = ({ category, data, idx, children }) => {
   const [leaveX, setLeaveX] = useState(0);
   const [scope, animate] = useAnimate();
   const { like, dislike } = useContext(AuthContext);
@@ -48,6 +48,7 @@ const Card = ({ category, data, idx }) => {
     }
   };
 
+  if (!data) return null;
   return (
     <motion.div
       drag='x'
@@ -58,19 +59,21 @@ const Card = ({ category, data, idx }) => {
         transition: { duration: 0.4 },
       }}
       animate={{
-        rotate: `${idx % 2 === 0 ? 2 : -2}deg`,
+        rotate: `${idx % 2 === 0 ? 0.5 : -0.5}deg`,
       }}
       ref={scope}
-      className='w-4/5 h-1/2 bg-nearBlack dark:bg-ghostW rounded-lg flex flex-col content-center justify-evenly text-ghostW dark:text-nearBlack text-2xl items-center justify-items-center absolute'
+      // className='w-4/5 h-1/2 min-h-fit bg-nearBlack dark:bg-ghostW rounded-lg flex flex-col content-center justify-evenly text-ghostW dark:text-nearBlack text-2xl items-center justify-items-center absolute'
+      className='w-4/5 h-1/2 min-h-fit bg-transparent rounded-lg flex flex-col content-center justify-evenly text-nearBlack dark:text-ghostW text-2xl items-center justify-items-center absolute backdrop-blur-3xl backdrop-brightness-110 p-1 text-center'
     >
       <Image
         src={data.img}
         alt={`Image of ${data.title}`}
-        height={44}
-        width={44}
-        className='h-2/3'
+        height={500}
+        width={500}
+        className='w-full h-2/3 rounded-lg px-1'
       />
       <h1>{data.title}</h1>
+      {children}
       <div className='w-full flex flex-row justify-between content-center items-center justify-items-center px-10'>
         <IconButton
           iconDataObject={dislikeIconData}
